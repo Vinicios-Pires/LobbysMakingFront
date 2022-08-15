@@ -1,43 +1,39 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useContext, useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Input, Button } from "./signin.styled";
 
-import UserContext from "./../../contexts/UserContext";
+import { UserContext } from "./../../contexts/UserContext";
 
 export default function Inputs() {
-	const navigate = useNavigate();
+	const navigator = useRef(useNavigate());
+	const { userToken, logUserIn } = useContext(UserContext);
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const { user, setUser } = useContext(UserContext);
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		if (userToken) navigator.current("/lobbys");
+	}, [userToken]);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 
-		setIsLoading(true);
-
-		try {
-			const response = await axios.post(
-				`${process.env.REACT_APP_API_URL}/signin`,
-				{
+		if (!isLoading) {
+			setIsLoading(true);
+			axios
+				.post(`${process.env.REACT_APP_API_URL}/signin`, {
 					email,
 					password,
-				}
-			);
-
-			setUser(response.data);
-			console.log(user.id);
-			alert("Logado com sucesso!");
-			navigate("/lobbys");
-		} catch (e) {
-			alert("Infelizmente nao foi possivel realizar o login :(");
-			console.log(e);
-		} finally {
-			setIsLoading(false);
+				})
+				.then(({ data }) => {
+					logUserIn(data);
+				}, navigator.current("/lobbys"))
+				.catch(() => alert("Nao foi possivel fazer o login :("))
+				.finally(() => setIsLoading(false));
 		}
 	}
 
@@ -48,12 +44,14 @@ export default function Inputs() {
 				type="text"
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
+				required
 			/>
 			<Input
 				placeholder="Sua senha"
 				type="password"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
+				required
 			/>
 			<Button type="submit" onClick={handleSubmit}>
 				{isLoading ? "Entrando..." : "Entrar"}
