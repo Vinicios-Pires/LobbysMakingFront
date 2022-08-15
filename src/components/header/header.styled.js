@@ -35,4 +35,9 @@ export const ButtonLoginHome = styled.button`
 
 	color: white;
 	font-weight: 700;
+	letter-spacing: 3px;
+
+	:hover {
+		cursor: pointer;
+	}
 `;
