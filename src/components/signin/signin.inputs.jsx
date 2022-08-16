@@ -7,7 +7,7 @@ import { Input, Button } from "./signin.styled";
 import { UserContext } from "./../../contexts/UserContext";
 
 export default function Inputs() {
-	const navigator = useRef(useNavigate());
+	const navigate = useRef(useNavigate());
 	const { userToken, logUserIn } = useContext(UserContext);
 
 	const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function Inputs() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		if (userToken) navigator.current("/lobbys");
+		if (userToken) navigate.current("/lobbys");
 	}, [userToken]);
 
 	async function handleSubmit(e) {
@@ -31,7 +31,7 @@ export default function Inputs() {
 				})
 				.then(({ data }) => {
 					logUserIn(data);
-				}, navigator.current("/lobbys"))
+				}, navigate.current("/lobbys"))
 				.catch(() => alert("Nao foi possivel fazer o login :("))
 				.finally(() => setIsLoading(false));
 		}

@@ -1,5 +1,5 @@
-// import axios from "axios";
-import { createContext, useState } from "react";
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
@@ -7,29 +7,29 @@ export function UserProvider({ children }) {
 	const [userToken, setUserToken] = useState("");
 	const [userInfo, setUserInfo] = useState({});
 
-	// useEffect(() => {
-	// 	const token = JSON.parse(localStorage.getItem("token"));
-	// 	if (token) {
-	// 		const url = `${process.env.REACT_APP_API_URL}/validateToken`;
-	// 		const config = {
-	// 			headers: {
-	// 				Authorization: `Bearer ${token}`,
-	// 			},
-	// 		};
+	useEffect(() => {
+		const token = JSON.parse(localStorage.getItem("token"));
+		if (token) {
+			const url = `${process.env.REACT_APP_API_URL}/validateToken`;
+			const config = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
 
-	// 		axios
-	// 			.post(url, {}, config)
-	// 			.then(({ data }) => {
-	// 				const { token, ...userData } = data;
-	// 				setUserToken(token);
-	// 				setUserInfo(userData);
-	// 			})
-	// 			.catch(() => {
-	// 				localStorage.removeItem("token");
-	// 				localStorage.removeItem("userInfo");
-	// 			});
-	// 	}
-	// }, []);
+			axios
+				.post(url, {}, config)
+				.then(({ data }) => {
+					const { token, ...userData } = data;
+					setUserToken(token);
+					setUserInfo(userData);
+				})
+				.catch(() => {
+					localStorage.removeItem("token");
+					localStorage.removeItem("userInfo");
+				});
+		}
+	}, []);
 
 	const logUserIn = (userInfo) => {
 		const { token, id, username } = userInfo;
