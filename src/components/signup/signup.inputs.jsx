@@ -29,7 +29,6 @@ export default function Inputs() {
 			navigate("/login");
 		} catch (e) {
 			alert("Infelizmente nao foi possivel realizar o cadastro :(");
-			console.log(e);
 		} finally {
 			setIsLoading(false);
 		}

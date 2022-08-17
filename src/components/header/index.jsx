@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 
 import { CreatorButton } from "./../lobbys/lobbys.styled";
@@ -30,7 +30,8 @@ export function HeaderHome() {
 }
 
 export function HeaderLobby() {
-	const { token } = useContext(UserContext);
+	const navigate = useRef(useNavigate());
+	const { token, logUserOut } = useContext(UserContext);
 	const [isLoading, setIsLoading] = useState(false);
 
 	function createLobby(e) {
@@ -57,12 +58,22 @@ export function HeaderLobby() {
 			});
 	}
 
+	function logOut() {
+		try {
+			logUserOut();
+			navigate.current("/");
+		} catch (e) {
+			window.alert("Nao foi possivel deslogar.");
+		}
+	}
+
 	return (
 		<HeaderContainer>
 			<HeaderLobbyContainer>
 				<CreatorButton onClick={createLobby} disabled={isLoading}>
 					{isLoading ? "Criando Lobby" : "Criar Lobby"}
 				</CreatorButton>
+				<button onClick={logOut}>Deslogar</button>
 			</HeaderLobbyContainer>
 		</HeaderContainer>
 	);

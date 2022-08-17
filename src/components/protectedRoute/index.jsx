@@ -8,10 +8,8 @@ export function ProtectedRoute({ children }) {
 	const { token, setUser, logUserOut } = useContext(UserContext);
 
 	useEffect(() => {
-		console.log(token);
 		if (!token) {
 			navigate.current("/login");
-			console.log("Jogar pra tela de login");
 			return;
 		}
 
