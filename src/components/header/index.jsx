@@ -30,7 +30,7 @@ export function HeaderHome() {
 }
 
 export function HeaderLobby() {
-	const { userToken } = useContext(UserContext);
+	const { token } = useContext(UserContext);
 	const [isLoading, setIsLoading] = useState(false);
 
 	function createLobby(e) {
@@ -40,7 +40,7 @@ export function HeaderLobby() {
 
 		const config = {
 			headers: {
-				Authorization: `Bearer ${userToken}`,
+				Authorization: `Bearer ${token}`,
 			},
 		};
 

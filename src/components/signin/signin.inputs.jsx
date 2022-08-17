@@ -8,7 +8,7 @@ import { UserContext } from "./../../contexts/UserContext";
 
 export default function Inputs() {
 	const navigate = useRef(useNavigate());
-	const { userToken, logUserIn } = useContext(UserContext);
+	const { token, logUserIn } = useContext(UserContext);
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -16,8 +16,8 @@ export default function Inputs() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		if (userToken) navigate.current("/lobbys");
-	}, [userToken]);
+		if (token) navigate.current("/lobbys");
+	}, [token]);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -31,7 +31,8 @@ export default function Inputs() {
 				})
 				.then(({ data }) => {
 					logUserIn(data);
-				}, navigate.current("/lobbys"))
+					navigate.current("/lobbys");
+				})
 				.catch(() => alert("Nao foi possivel fazer o login :("))
 				.finally(() => setIsLoading(false));
 		}

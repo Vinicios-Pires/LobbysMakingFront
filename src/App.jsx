@@ -9,6 +9,7 @@ import Lobbys from "./components/lobbys";
 
 import "./styles/reset.css";
 import GlobalStyle from "./styles/GlobalStyle";
+import { ProtectedRoute } from "./components/protectedRoute";
 
 function App() {
 	return (
@@ -20,7 +21,14 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/login" element={<Signin />} />
 						<Route path="/sign-up" element={<Signup />} />
-						<Route path="/lobbys" element={<Lobbys />} />
+						<Route
+							path="/lobbys"
+							element={
+								<ProtectedRoute>
+									<Lobbys />
+								</ProtectedRoute>
+							}
+						/>
 					</Routes>
 				</BrowserRouter>
 			</UserProvider>
