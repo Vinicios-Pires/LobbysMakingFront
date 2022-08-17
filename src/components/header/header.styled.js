@@ -41,3 +41,11 @@ export const ButtonLoginHome = styled.button`
 		cursor: pointer;
 	}
 `;
+
+export const HeaderLobbyContainer = styled.div`
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 30px;
+`;

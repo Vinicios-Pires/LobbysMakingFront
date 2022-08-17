@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { HeaderLobby } from "../header";
+import { HeaderClean } from "../header";
 import Inputs from "./signup.inputs";
 
 import { Container, ToSignIn } from "./signup.styled";
@@ -8,7 +8,7 @@ import { Container, ToSignIn } from "./signup.styled";
 export default function Signup() {
 	return (
 		<>
-			<HeaderLobby />
+			<HeaderClean />
 			<Container>
 				<Inputs />
 				<Link to="/login">
