@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { HeaderLobby } from "../header";
-import { Container } from "./lobbys.styled";
+import { Container, LobbyInterface, ButtonChallenge } from "./lobbys.styled";
 
 export default function Lobbys() {
 	const [lobbys, setLobbys] = useState([]);
@@ -27,17 +27,35 @@ export default function Lobbys() {
 				})
 				.finally(() => setIsLoading(false));
 		}
-	}, [token]);
-
-	console.log(lobbys);
+	}, []);
 
 	if (isLoading) return <Container>Loading</Container>;
+
+	function handleChallenge() {
+		console.log("VOU DESAFIAR VOCE");
+	}
 
 	return (
 		<>
 			<HeaderLobby />
 			<Container>
-				{lobbys.length > 0 ? lobbys.map((lobby) => {}) : "Sem lobby's"}
+				{lobbys?.map((lobby) => (
+					<LobbyInterface key={lobby.id}>
+						<p>
+							{lobby.user.username === user.username
+								? "SUA SALA"
+								: "SALA ADVERSARIA"}
+						</p>
+						<p>{lobby.user.username}</p>
+						{lobby.user.username !== user.username ? (
+							<ButtonChallenge onClick={handleChallenge}>
+								DESAFIAR
+							</ButtonChallenge>
+						) : (
+							""
+						)}
+					</LobbyInterface>
+				))}
 			</Container>
 		</>
 	);

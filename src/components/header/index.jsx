@@ -3,7 +3,7 @@ import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 
-import { CreatorButton } from "./../lobbys/lobbys.styled";
+import { CreatorButton, LogoutButton } from "./../lobbys/lobbys.styled";
 
 import {
 	HeaderContainer,
@@ -73,7 +73,7 @@ export function HeaderLobby() {
 				<CreatorButton onClick={createLobby} disabled={isLoading}>
 					{isLoading ? "Criando Lobby" : "Criar Lobby"}
 				</CreatorButton>
-				<button onClick={logOut}>Deslogar</button>
+				<LogoutButton onClick={logOut}>Deslogar</LogoutButton>
 			</HeaderLobbyContainer>
 		</HeaderContainer>
 	);
