@@ -15,6 +15,15 @@ export const ToSignIn = styled.h1`
 	letter-spacing: 0.2rem;
 `;
 
+export const Form = styled.form`
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
 export const Input = styled.input`
 	width: 30%;
 	height: 5%;
@@ -34,11 +43,17 @@ export const Input = styled.input`
 
 export const Button = styled.button`
 	width: 23%;
-	height: 3%;
+	height: 5%;
+
+	background-color: #2c97de;
 
 	font-size: 20px;
 
 	border-radius: 12px;
 
 	margin-bottom: 30px;
+
+	:hover {
+		cursor: pointer;
+	}
 `;

@@ -2,7 +2,13 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { HeaderLobby } from "../header";
-import { Container, LobbyInterface, ButtonChallenge } from "./lobbys.styled";
+import {
+	Container,
+	LobbyInterface,
+	ButtonChallenge,
+	LobbyTitle,
+	PlayerName,
+} from "./lobbys.styled";
 
 export default function Lobbys() {
 	const [lobbys, setLobbys] = useState([]);
@@ -41,12 +47,12 @@ export default function Lobbys() {
 			<Container>
 				{lobbys?.map((lobby) => (
 					<LobbyInterface key={lobby.id}>
-						<p>
+						<LobbyTitle>
 							{lobby.user.username === user.username
 								? "SUA SALA"
 								: "SALA ADVERSARIA"}
-						</p>
-						<p>{lobby.user.username}</p>
+						</LobbyTitle>
+						<PlayerName>{lobby.user.username}</PlayerName>
 						{lobby.user.username !== user.username ? (
 							<ButtonChallenge onClick={handleChallenge}>
 								DESAFIAR

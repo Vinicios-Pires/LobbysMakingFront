@@ -12,7 +12,7 @@ export const CreatorButton = styled.button`
 	width: 100px;
 	height: 40px;
 
-	border-radius: 20%;
+	border-radius: 10px;
 
 	background-color: #2c97de;
 
@@ -29,7 +29,7 @@ export const LogoutButton = styled.button`
 	width: 100px;
 	height: 40px;
 
-	border-radius: 20%;
+	border-radius: 10px;
 
 	background-color: #2c97de;
 
@@ -56,9 +56,22 @@ export const LobbyInterface = styled.div`
 	border-radius: 5%;
 `;
 
+export const LobbyTitle = styled.p`
+	color: white;
+	font-weight: 700;
+	letter-spacing: 0.29px;
+`;
+
+export const PlayerName = styled.p`
+	color: white;
+	letter-spacing: 1px;
+`;
+
 export const ButtonChallenge = styled.button`
-	width: 100px;
+	width: 150px;
 	height: 40px;
+
+	border-radius: 10px;
 
 	background-color: green;
 
@@ -68,5 +81,6 @@ export const ButtonChallenge = styled.button`
 
 	:hover {
 		cursor: pointer;
+		background-color: #43bc2b;
 	}
 `;

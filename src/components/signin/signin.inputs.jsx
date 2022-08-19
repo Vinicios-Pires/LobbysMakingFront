@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useContext, useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import { Input, Button } from "./signin.styled";
+import { Input, Button, Form, ToSignUp } from "./signin.styled";
 
 import { UserContext } from "./../../contexts/UserContext";
 
@@ -40,23 +40,28 @@ export default function Inputs() {
 
 	return (
 		<>
-			<Input
-				placeholder="Seu email"
-				type="text"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
-				required
-			/>
-			<Input
-				placeholder="Sua senha"
-				type="password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-				required
-			/>
-			<Button type="submit" onClick={handleSubmit}>
-				{isLoading ? "Entrando..." : "Entrar"}
-			</Button>
+			<Form onSubmit={handleSubmit}>
+				<Input
+					placeholder="Seu email"
+					type="text"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					required
+				/>
+				<Input
+					placeholder="Sua senha"
+					type="password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					required
+				/>
+				<Button type="submit" onClick={handleSubmit}>
+					{isLoading ? "Entrando..." : "Entrar"}
+				</Button>
+				<Link to="/sign-up">
+					<ToSignUp>Ainda não possui uma conta?</ToSignUp>
+				</Link>
+			</Form>
 		</>
 	);
 }

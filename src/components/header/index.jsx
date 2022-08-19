@@ -50,6 +50,7 @@ export function HeaderLobby() {
 			.then((response) => {
 				setIsLoading(false);
 				alert("Lobby criada com sucesso!");
+				window.location.reload();
 			})
 			.catch(({ response }) => {
 				e.preventDefault();

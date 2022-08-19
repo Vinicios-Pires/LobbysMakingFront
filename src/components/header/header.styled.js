@@ -29,7 +29,7 @@ export const ButtonLoginHome = styled.button`
 	width: 100px;
 	height: 40px;
 
-	border-radius: 20%;
+	border-radius: 10px;
 
 	background-color: #2c97de;
 

@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useRef, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-import { Input, Button } from "./signup.styled";
+import { Input, Button, ToSignIn, Form } from "./signup.styled";
 
 export default function Inputs() {
-	const navigate = useNavigate();
+	const navigate = useRef(useNavigate());
 
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
@@ -26,7 +26,7 @@ export default function Inputs() {
 			});
 
 			alert("Cadastrado com sucesso!");
-			navigate("/login");
+			navigate.current("/login");
 		} catch (e) {
 			alert("Infelizmente nao foi possivel realizar o cadastro :(");
 		} finally {
@@ -36,27 +36,32 @@ export default function Inputs() {
 
 	return (
 		<>
-			<Input
-				placeholder="Seu email"
-				type="text"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
-			/>
-			<Input
-				placeholder="Seu nick"
-				type="text"
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
-			/>
-			<Input
-				placeholder="Sua senha"
-				type="password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-			/>
-			<Button type="submit" onClick={handleSubmit}>
-				{isLoading ? "Cadastrando..." : "Cadastrar"}
-			</Button>
+			<Form onSubmit={handleSubmit}>
+				<Input
+					placeholder="Seu email"
+					type="text"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
+				<Input
+					placeholder="Seu nick"
+					type="text"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+				/>
+				<Input
+					placeholder="Sua senha"
+					type="password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<Button id="submit_btn_signup" type="submit" onClick={handleSubmit}>
+					{isLoading ? "Cadastrando..." : "Cadastrar"}
+				</Button>
+				<Link to="/login">
+					<ToSignIn>Já possui uma conta? Faça seu login</ToSignIn>
+				</Link>
+			</Form>
 		</>
 	);
 }
